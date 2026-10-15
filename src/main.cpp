@@ -1,7 +1,9 @@
 /* 
    ====================================================================
-   Materia: Laboratorio de Programación (LPR) — 5°
-   Institución: E.E.S.T. N° 1 "Eduardo Ader" - Vicente López
+   Materia: Laboratorio de Programación (LPR) — 5° Año
+   Institución: E.E.S.T. N.º 1 "Eduardo Ader" - Vicente López
+   Curso: 5° Año 5° 3°
+   Estudiante: Gabriel Zacarias
    Archivo: src/main.cpp
    Actividad 6: Suite de Taller de Repaso e Integración
    ====================================================================
@@ -11,7 +13,7 @@
 
 using namespace std;
 
-// Prototipos de funciones modulares
+// Prototipos de funciones modulares (Cumpliendo diseño Top-Down)
 int sumaRecursiva(int n);
 void intercambiarValores(int* ptrA, int* ptrB);
 
@@ -37,7 +39,7 @@ int main() {
             cout << "[SISTEMA] Valor " << numeroBuscar << " hallado en el indice [" << i << "]" << endl;
             cout << "          Direccion RAM Hexadecimal: " << &vectorDatos[i] << endl;
             hallado = true;
-            break; // Interrupción optimizada del ciclo O(n)
+            break; // Interrupción optimizada del ciclo O(n) tras hallar coincidencia
         }
     }
 
@@ -50,25 +52,24 @@ int main() {
     int x = 100, y = 500;
     cout << "Valores previos  -> X: " << x << " | Y: " << y << endl;
 
-    // Invocación pasando direcciones de memoria
+    // Invocación pasando direcciones físicas de memoria mediante operador '&'
     intercambiarValores(&x, &y);
 
     cout << "Valores actuales -> X: " << x << " | Y: " << y << endl;
     cout << "=====================================================" << endl;
 
-    return 0; // Código 0: Ejecución exitosa
+    return 0; // Código 0: Ejecución exitosa en Windows
 }
 
-// Desarrollo de la función recursiva con caso base garantizado
+// Desarrollo del Módulo 1: Función recursiva con caso base de corte explícito
 int sumaRecursiva(int n) {
-    if (n <= 0) return 0; // Caso base obligatorio para prevenir Stack Overflow
-    return n + sumaRecursiva(n - 1); // Llamada recursiva
+    if (n <= 0) return 0; // Caso base obligatorio para prevenir desbordamientos (Stack Overflow)
+    return n + sumaRecursiva(n - 1); // Llamada recursiva con reducción del parámetro
 }
 
-// Desarrollo del intercambio físico mediante desreferenciación
+// Desarrollo del Módulo 3: Permutación física en RAM mediante desreferenciación con '*'
 void intercambiarValores(int* ptrA, int* ptrB) {
-    int temporal = *ptrA;
-    *ptrA = *ptrB;
-    *ptrB = temporal;
+    int temporal = *ptrA; // Copia el contenido de la primera celda en un búfer temporal
+    *ptrA = *ptrB;        // Escribe el valor de la segunda celda en la primera posición
+    *ptrB = temporal;     // Asigna el valor guardado en el búfer a la segunda celda
 }
-
